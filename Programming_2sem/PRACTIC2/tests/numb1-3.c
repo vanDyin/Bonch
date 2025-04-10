@@ -127,7 +127,7 @@ int main() {
     }
 
     int count3 = task3(STUDENTS, NEWSTUDENTS3);
-    if (count2 == 0) {
+    if (count3 == 0) {
         printf("There are no students, who have 2\n");
     } else {
         printf("\nStudents, who have 2:\n");
