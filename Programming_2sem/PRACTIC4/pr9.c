@@ -15,5 +15,10 @@ int main() {
     printf("Введите слово для проверки: ");
     scanf("%s", string);
     int len = strlen(string);
-    printf("%d\n", recur(string, len, 0, 0));
+
+    if (recur(string, len, 0, 0) == 1) {
+        printf("YES\n");
+    } else {
+        printf("NO\n");
+    }
 }
