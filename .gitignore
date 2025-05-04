@@ -1,3 +1,5 @@
 ./Programmin_1sem/.vscode
-./Programmin_2sem/.vscode
+./Programming_2sem/.vscode
+./AOPI/.vscode
 *.exe
+*.json

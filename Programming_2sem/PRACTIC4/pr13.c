@@ -2,6 +2,7 @@
 
 void func(int *sum, int *count) {
     int num;
+    printf("Input el => ");
     scanf("%d", &num); 
     
     if (num == 0) {    
