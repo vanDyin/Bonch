@@ -30,7 +30,6 @@ void initTM(Tmashine *TM) {
 }
 
 void print(Tmashine *TM) {
-    // Выводим 10 символов слева и справа от текущей позиции
     for (int i = 3; i > 0; i-- ) {
         printf("%c", TM->tape[start-i]);
     }
@@ -49,7 +48,7 @@ int main() {
         print(&TM);
 
         switch (TM.status) {
-            case 1:
+            case 1:  // Ищем первую 1 в 1 массиве (двигаемся вправо)
                 if (TM.tape[TM.head] == '0') {
                     TM.head++;
                 } else {
@@ -57,7 +56,7 @@ int main() {
                 }
                 break;
                 
-            case 2:
+            case 2:  // Идем по 1 массиву до разделителя 0
                 if (TM.tape[TM.head] == '0') {
                     TM.head++;
                     TM.status = 3;
@@ -66,21 +65,21 @@ int main() {
                 }
                 break;
                 
-            case 3:
+            case 3: // Ищем первую 1 во 2 массиве (двигаемся вправо)
                 if (TM.tape[TM.head] == '1') {
                     TM.head--;
                     TM.status = 4;
                 }
                 break;
                 
-            case 4:
+            case 4:   // Возвращаемся к последней 1 в 1 массиве (влево)
                 if (TM.tape[TM.head] == '0') {
                     TM.head--;
                     TM.status = 5;
                 }
                 break;
                 
-            case 5:
+            case 5:  // Проверяем два 0 подряд
                 if (TM.tape[TM.head] == '0') {
                     TM.status = 13;
                 } else {
@@ -89,7 +88,7 @@ int main() {
                 }
                 break;
                 
-            case 6:
+            case 6: // Копируем 1 из 1 массива (заменяем 0 на 1)
                 if (TM.tape[TM.head] == '0') {
                     TM.tape[TM.head] = '1';
                     TM.head++;
@@ -99,7 +98,7 @@ int main() {
                 }
                 break;
                 
-            case 7:
+            case 7: // (меняем 1 на 0
                 if (TM.tape[TM.head] == '1') {
                     TM.tape[TM.head] = '0';
                     TM.head++;
@@ -107,7 +106,7 @@ int main() {
                 }
                 break;
                 
-            case 8:
+            case 8:  // Идем к разделителю через 1 массив (вправо)
                 if (TM.tape[TM.head] == '0') {
                     TM.head++;
                     TM.status = 9;
@@ -116,7 +115,7 @@ int main() {
                 }
                 break;
                 
-            case 9:
+            case 9: // Идем через 2 массив к месту для 3 массива (вправо)
                 if (TM.tape[TM.head] == '0') {
                     TM.head++;
                     TM.status = 10;
@@ -125,7 +124,7 @@ int main() {
                 }
                 break;
                 
-            case 10:
+            case 10: // Добавляем 1 в 3 массив (пишем 1 и идем влево)
                 if (TM.tape[TM.head] == '0') {
                     TM.tape[TM.head] = '1';
                     TM.head--;
@@ -135,7 +134,7 @@ int main() {
                 }
                 break;
                 
-            case 11:
+            case 11: // Возвращаемся через 3 массив (влево)
                 if (TM.tape[TM.head] == '0') {
                     TM.head--;
                     TM.status = 12;
@@ -144,7 +143,7 @@ int main() {
                 }
                 break;
                 
-            case 12:
+            case 12: // Возвращаемся к началу цикла (влево)
                 if (TM.tape[TM.head] == '0') {
                     TM.status = 4;
                 } else {
@@ -152,7 +151,7 @@ int main() {
                 }
                 break;
                 
-            case 13:
+            case 13: // добавляем 1
                 if (TM.tape[TM.head] == '0') {
                     TM.tape[TM.head] = '1';
                     TM.head--;
@@ -160,7 +159,7 @@ int main() {
                 }
                 break;
                 
-            case 14:
+            case 14: // Возврат к началу x1 (влево)
                 if (TM.tape[TM.head] == '0') {
                     TM.head++;
                     TM.status = 15;
@@ -169,7 +168,7 @@ int main() {
                 }
                 break;
                 
-            case 15:
+            case 15: // меняем 1 на 0 и останавливаемся
                 if (TM.tape[TM.head] == '1') {
                     TM.tape[TM.head] = '0';
                     TM.status = 0;
