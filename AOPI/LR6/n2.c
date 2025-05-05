@@ -12,7 +12,7 @@ typedef struct str {
 
 void initTM(Tmashine *TM) {
     memset(TM->tape, ' ', N);
-    TM->status = 0;
+    TM->status = 1;
 
     int index = start;
     char sym = 0;
@@ -25,7 +25,7 @@ void initTM(Tmashine *TM) {
         TM->tape[index++] = sym;
     }
 
-    TM->head = index;
+    TM->head = index-1;
 }
 
 void print(Tmashine *TM) {
@@ -36,7 +36,7 @@ void print(Tmashine *TM) {
         printf("%c", TM->tape[start+i]);
     }
 
-    printf(" - state: %d\n", TM->status);
+    printf(" - state: %d  (%c)\n", TM->status, TM->tape[TM->head]);
 }
 
 
@@ -66,7 +66,7 @@ int main() {
                 break;
             
             case 2: // переход к левому числу a
-                if (current = ' ') {
+                if (current == ' ') {
                     TM.status = 5;
                     TM.head++;
                 } else if (current == '-') {
@@ -78,16 +78,61 @@ int main() {
                 break;
             
             case 3: // обработка левого числа a
-                if (current = ' ') {
+                if (current == ' ') {
                     TM.status = 5;
                     TM.head++;
+                } else if (strchr("23456789", current)) {
+                    TM.status = 4;
+                    TM.tape[TM.head]--;
+                    TM.head++;
+                } else if (current == '1') {
+                    TM.status = 4;
+                    TM.tape[TM.head]--;
+                    TM.head--;
+                } else if (current == '0') {
+                    TM.status = 3;
+                    TM.tape[TM.head] = '9';
+                    TM.head--;
                 }
+                break;
+            
             case 4: // возврат к правому числу b
+                if (strchr(str, current) || current == '0') {
+                    TM.head++;
+                } else if (current == ' ') {
+                    TM.status = 6;
+                    TM.head++;
+                } else if (current == '-') {
+                    TM.status = 1;
+                    TM.head++;
+                }
+                break;
+            
             case 5: // заверешние
+                if (current == ' ') {
+                    TM.status = -1;
+                } else if (current == '-') {
+                    TM.status = 1;
+                    TM.head++;
+                }
+                break;
+            
             case 6:
- 
-
+                if (current == ' ') {
+                    TM.head++;
+                } else if (current == '-') {
+                    TM.status = 5;
+                    TM.tape[TM.head] = ' ';
+                } else if (current == '0') {
+                    TM.tape[TM.head] = ' ';
+                    TM.head++;
+                }
+                break;
+        }
     }
+
+    printf("Result:\n");
+    print(&TM);
     return 0;
 
 }
