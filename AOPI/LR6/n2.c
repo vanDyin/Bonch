@@ -4,6 +4,8 @@
 #define N 1000
 #define start 500
 
+// int count = 1;
+
 typedef struct str {
     char tape[N];
     int head;
@@ -29,6 +31,8 @@ void initTM(Tmashine *TM) {
 }
 
 void print(Tmashine *TM) {
+    // printf("%2d) ", count);
+    // count++;
     for (int i = 10; i > 0; i-- ) {
         printf("%c", TM->tape[start-i]);
     }
@@ -36,7 +40,8 @@ void print(Tmashine *TM) {
         printf("%c", TM->tape[start+i]);
     }
 
-    printf(" - state: %d  (%c)\n", TM->status, TM->tape[TM->head]);
+    // printf(" - state: %d  (%c)\n", TM->status, TM->tape[TM->head]);
+    printf("\n");
 }
 
 
@@ -47,7 +52,7 @@ int main() {
     
 
     while (TM.status != -1) {
-        print(&TM);
+        //print(&TM);
         current = TM.tape[TM.head];
         
         switch (TM.status) {
@@ -62,6 +67,8 @@ int main() {
                 } else if (current == '0') {
                     TM.tape[TM.head] = '9';
                     TM.head--;
+                } else if (current == ' ') {
+                    TM.status = -1;
                 }
                 break;
             
@@ -88,7 +95,7 @@ int main() {
                 } else if (current == '1') {
                     TM.status = 4;
                     TM.tape[TM.head]--;
-                    TM.head++;
+                    TM.head--;
                 } else if (current == '0') {
                     TM.status = 3;
                     TM.tape[TM.head] = '9';
@@ -98,7 +105,7 @@ int main() {
             
             case 4: // возврат к правому числу b
                 if (strchr(str, current) || current == '0') {
-                    TM.head++;
+                    TM.head--;
                 } else if (current == ' ') {
                     TM.status = 6;
                     TM.head++;
@@ -112,8 +119,10 @@ int main() {
                 if (current == ' ') {
                     TM.status = -1;
                 } else if (current == '-') {
-                    TM.status = 1;
-                    TM.head++;
+                    TM.tape[TM.head] = ' ';
+                } else if (current == '9') {
+                    TM.tape[TM.head] = ' ';
+                    TM.head--;
                 }
                 break;
             
