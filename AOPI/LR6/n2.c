@@ -88,7 +88,7 @@ int main() {
                 } else if (current == '1') {
                     TM.status = 4;
                     TM.tape[TM.head]--;
-                    TM.head--;
+                    TM.head++;
                 } else if (current == '0') {
                     TM.status = 3;
                     TM.tape[TM.head] = '9';
