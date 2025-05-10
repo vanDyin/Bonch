@@ -40,8 +40,8 @@ void print(Tmashine *TM) {
         printf("%c", TM->tape[start+i]);
     }
 
-    // printf(" - state: %d  (%c)\n", TM->status, TM->tape[TM->head]);
-    printf("\n");
+    printf(" - state: %d  (%c)\n", TM->status, TM->tape[TM->head]);
+    // printf("\n");
 }
 
 
@@ -52,7 +52,7 @@ int main() {
     
 
     while (TM.status != -1) {
-        //print(&TM);
+        print(&TM);
         current = TM.tape[TM.head];
         
         switch (TM.status) {

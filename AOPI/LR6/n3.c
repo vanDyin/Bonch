@@ -11,12 +11,12 @@ typedef struct str {
 } Tmashine;
 
 void initTM(Tmashine *TM) {
-    memset(TM->tape, 'l', N);
+    memset(TM->tape, 'D', N);
     TM->status = 1;
     TM->head = start+1;
     int index = start;
     char sym = 0;
-    printf("input numb (l1^xl) \n> ");
+    printf("input numb (D1^xD) \n> ");
     while (sym != '\n') {
         sym = getchar();
         if (sym == '\n') {
@@ -35,8 +35,8 @@ void print(Tmashine *TM) {
         printf("%c", TM->tape[start+i]);
     }
 
-    // printf(" - state: %d  (%c)\n", TM->status, TM->tape[TM->head]);
-    printf("\n");
+    printf(" - state: %d  (%c)\n", TM->status, TM->tape[TM->head]);
+    // printf("\n");
 }
 
 
@@ -46,12 +46,12 @@ int main() {
     initTM(&TM);
 
     while (TM.status != 0) {
-        // print(&TM);
+        print(&TM);
         current = TM.tape[TM.head];
 
         switch (TM.status) {
             case 1: 
-                if (current == 'l') {
+                if (current == 'D') {
                     TM.status = 0;
                 } else if (current = '1') {
                     TM.head++;
@@ -59,7 +59,7 @@ int main() {
                 }
                 break;
             case 2:
-                if (current == 'l') {
+                if (current == 'D') {
                     TM.status = 4;
                     TM.head--;
                 } else if (current == '1') {
@@ -68,7 +68,7 @@ int main() {
                 }
                 break;
             case 3:
-                if (current == 'l') {
+                if (current == 'D') {
                     TM.status = 5;
                     TM.head--;
                 } else if (current == '1') {
@@ -77,26 +77,26 @@ int main() {
                 }
                 break;
             case 4:
-                if (current == 'l') {
+                if (current == 'D') {
                     TM.status = 6;
                     TM.head++;
                 } else if (current == '1') {
-                    TM.tape[TM.head] = 'l';
+                    TM.tape[TM.head] = 'D';
                     TM.status = 4;
                     TM.head--;
                 }
                 break;
             case 5:
-                if (current == 'l') {
+                if (current == 'D') {
                     TM.status = 0;
                     TM.head++;
                 } else if (current == '1') {
-                    TM.tape[TM.head] = 'l';
+                    TM.tape[TM.head] = 'D';
                     TM.head--;
                 }
                 break;
             case 6:
-                if (current == 'l') {
+                if (current == 'D') {
                     TM.tape[TM.head] = '1';
                     TM.status = 0;
                 }

@@ -33,7 +33,7 @@ void print(Tmashine *TM) {
     for (int i = 3; i > 0; i-- ) {
         printf("%c", TM->tape[start-i]);
     }
-    for (int i = 0; i < 40; i++ ) {
+    for (int i = 0; i < 15; i++ ) {
         printf("%c", TM->tape[start+i]);
     }
 
