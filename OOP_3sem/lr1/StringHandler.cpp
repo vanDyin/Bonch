@@ -2,7 +2,9 @@
 #include <cstring>
 #include <iostream>
 
-String::String() : data(nullptr) {}
+String::String() {
+    data = nullptr;
+}
 
 String::String(const char* str) {
     if (str) {
@@ -54,7 +56,9 @@ void String::Copy(const String str) {
 }
 
 int String::Find(char ch, int start) const {
-    if (!data || start < 0 || start >= Length()) return -1;
+    if (!data || start < 0 || start >= Length()) {
+        return -1;
+    }
     
     for (int i = start; data[i] != '\0'; i++) {
         if (data[i] == ch) {
@@ -65,8 +69,10 @@ int String::Find(char ch, int start) const {
 }
 
 int String::FindLast(char ch) const {
-    if (!data) return -1;
-    
+    if (!data) {
+        return -1;
+    }
+
     int lastPos = -1;
     for (int i = 0; data[i] != '\0'; i++) {
         if (data[i] == ch) {
@@ -86,20 +92,22 @@ String String::Substr(int index, int count) const {
         actualCount = Length() - index;
     }
     
-    char* temp = new char[actualCount + 1];
+    char* tmp = new char[actualCount + 1];
     for (int i = 0; i < actualCount; i++) {
-        temp[i] = data[index + i];
+        tmp[i] = data[index + i];
     }
-    temp[actualCount] = '\0';
+    tmp[actualCount] = '\0';
     
-    String result(temp);
-    delete[] temp;
+    String result(tmp);
+    delete[] tmp;
     return result;
 }
 
 void String::Remove(int index, int count) {
-    if (!data || index < 0 || index >= Length() || count <= 0) return;
-    
+    if (!data || index < 0 || index >= Length() || count <= 0) {
+        return;
+    } 
+
     int len = Length();
     int actualCount = count;
     if (index + count > len) {
@@ -123,12 +131,16 @@ void String::Remove(int index, int count) {
 }
 
 void String::Insert(char* s, int index) {
-    if (!s || index < 0) return;
+    if (!s || index < 0) {
+        return;
+    }
     
     int len = Length();
     int insertLen = strlen(s);
     
-    if (index > len) index = len;
+    if (index > len) {
+        index = len;
+    }
     
     int newLen = len + insertLen;
     char* newData = new char[newLen + 1];

@@ -2,8 +2,6 @@
 #include "StringHandler.h"
 
 int main() {
-    setlocale(LC_ALL, "ru_RU.UTF-8");
-    
     String str1;
     str1.Insert("Hello World", 0);
     str1.print();
@@ -25,7 +23,7 @@ int main() {
     
     str1.Insert(" C++", 5);
     str1.print();
-    
+
     return 0;
 }
 
