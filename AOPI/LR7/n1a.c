@@ -267,5 +267,5 @@ int main() {
         printf("%s: %8.4f сек.\n", arr[alg].comm, times[alg] / RAND_TIMES);
     }
 
-    return 0;
+    return 0; 
 }
