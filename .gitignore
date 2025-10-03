@@ -1,7 +1,44 @@
-./Programmin_1sem/.vscode
-./Programming_2sem/.vscode
-./OOP_3sem/.vscode
-./MZYAP_3sem/.vscode
-./AOPI/.vscode
+# Игнорировать конкретные файлы
+program
+main9
+main15
+
+#игнорировать ненужные файлы
+*.doc
+*.docx
+
+# Игнорировать несколько папок (добавьте нужные названия)
+Ass/
+KFC/
+Model/
+metodicheskiezadaniya/
+
+# Игнорировать все исполняемые файлы Windows
 *.exe
-*.json
+
+# Игнорировать все временные файлы
+*.tmp
+*.temp
+
+# Игнорировать системные файлы
+.DS_Store
+Thumbs.db
+
+# Игнорировать логи
+*.log
+
+# Игнорировать скомпилированные бинарники
+*.dll
+*.so
+*.dylib
+
+# Игнорировать архивные файлы
+*.zip
+*.rar
+*.7z
+
+# Игнорировать файлы IDE
+.vscode/
+.idea/
+*.swp
+*.swo
