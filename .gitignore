@@ -8,7 +8,7 @@ main15
 *.docx
 
 # Игнорировать несколько папок (добавьте нужные названия)
-Ass/
+labs_202509/
 KFC/
 Model/
 metodicheskiezadaniya/
