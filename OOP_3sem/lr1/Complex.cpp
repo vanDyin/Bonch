@@ -1,33 +1,21 @@
-#include "complex.h"
+#include "Complex.h"
+#include <cmath>
+#include <iostream>
 
-void Complex::calculateModulus() {
-    modulus = std::sqrt(real * real + imag * imag);
+Complex::Complex(){
+    real = 0;
+    imag = 0; 
+    modulus = 0; 
 }
 
-Complex::Complex(double r, double i) : real(r), imag(i) {
-    calculateModulus();
-}
-
-double Complex::getReal() const {
-    return real;
-}
-
-double Complex::getImag() const {
-    return imag;
-}
-
-double Complex::getModulus() const {
-    return modulus;
-}
-
-void Complex::setReal(double r) {
+Complex::Complex(double r, double i){
     real = r;
-    calculateModulus();
+    imag = i; 
+    updateModulus();
 }
 
-void Complex::setImag(double i) {
-    imag = i;
-    calculateModulus();
+void Complex::updateModulus() {
+    modulus = sqrt(real * real + imag * imag);
 }
 
 Complex Complex::operator+(const Complex& other) const {
@@ -39,27 +27,26 @@ Complex Complex::operator-(const Complex& other) const {
 }
 
 Complex Complex::operator*(const Complex& other) const {
-    double newReal = real * other.real - imag * other.imag;
-    double newImag = real * other.imag + imag * other.real;
-    return Complex(newReal, newImag);
+    double r = real * other.real - imag * other.imag;
+    double i = real * other.imag + imag * other.real;
+    return Complex(r, i);
 }
 
 Complex Complex::operator/(const Complex& other) const {
-    double denominator = other.real * other.real + other.imag * other.imag;
-    if (denominator == 0) {
-        throw std::runtime_error("Division by zero");
+    double a = other.real * other.real + other.imag * other.imag;
+
+    if (a == 0) {
+        return Complex(0, 0);
     }
-    
-    double newReal = (real * other.real + imag * other.imag) / denominator;
-    double newImag = (imag * other.real - real * other.imag) / denominator;
-    return Complex(newReal, newImag);
+    double r = (real * other.real + imag * other.imag) / a;
+    double i = (imag * other.real - real * other.imag) / a;
+    return Complex(r, i);
 }
 
-void Complex::display() const {
+void Complex::print() const {
     if (imag >= 0) {
-        std::cout << real << " + " << imag << "i";
+        std::cout << real << " + " << imag << "i (modulus: " << modulus << ")" << std::endl;
     } else {
-        std::cout << real << " - " << -imag << "i";
+        std::cout << real << " - " << -imag << "i (modulus: " << modulus << ")" << std::endl;
     }
-    std::cout << " (modulus: " << modulus << ")";
 }
