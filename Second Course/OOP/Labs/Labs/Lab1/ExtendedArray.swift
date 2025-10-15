@@ -1,12 +1,19 @@
 class CustomArray {
-    private var elements: [Int]
+    private var elements: [Int] {
+        didSet {
+            capacity = elements.count
+        }
+    }
+    private var capacity: Int = 0
     
     init() {
         self.elements = []
+        self.capacity = 0
     }
     
     init(elements: [Int]) {
         self.elements = elements
+        self.capacity = elements.count
     }
     
     //копирование массива
@@ -16,13 +23,15 @@ class CustomArray {
     
     //ввод элементов с клавиатуры
     func inputElements() {
-        elements.removeAll()
         print("Введите количество элементов: ", terminator: "")
         
         guard let countInput = readLine(), let count = Int(countInput), count > 0 else {
             print("Некорректный ввод количества элементов")
             return
         }
+        
+        capacity = count
+        elements.removeAll()
         
         for i in 0..<count {
             print("Введите элемент \(i + 1): ", terminator: "")
@@ -41,6 +50,7 @@ class CustomArray {
         } else {
             print("Элементы массива: \(elements)")
         }
+        print(getCapacity())
     }
     
     //добавка элемента в конец
@@ -60,6 +70,11 @@ class CustomArray {
     //вычисление наибольшего элемента массива
     func maxElement() -> Int? {
         return elements.max()
+    }
+    
+    //получение вместимости
+    func getCapacity() -> String {
+        return "Количество элементов: \(capacity)"
     }
     
     subscript(index: Int) -> Int {
@@ -83,6 +98,8 @@ func demonstrateArrayTask() {
     let array2 = array1.copy()
     print("Скопированный массив:")
     array2.printElements()
+//    print("\(Unmanaged.passUnretained(array1).toOpaque())")
+//    print("\(Unmanaged.passUnretained(array2).toOpaque())")
     
     //добавление элемента в конец
     array1.append(11)

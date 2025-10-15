@@ -22,22 +22,9 @@
 		C425EA862E9D1C7A003B9613 /* Labs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Labs; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C425EA992E9D2E7E003B9613 /* Exceptions for "Labs" folder in "Labs" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Lab2/Untitled.swift,
-			);
-			target = C425EA852E9D1C7A003B9613 /* Labs */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C425EA882E9D1C7A003B9613 /* Labs */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				C425EA992E9D2E7E003B9613 /* Exceptions for "Labs" folder in "Labs" target */,
-			);
 			path = Labs;
 			sourceTree = "<group>";
 		};
