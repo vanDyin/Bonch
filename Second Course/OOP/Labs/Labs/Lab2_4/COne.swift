@@ -1,3 +1,5 @@
+// Four classes in one file are specially made, I know that you shouldn't do that.
+
 class COne {
     private var _d: Double
     private var _s: String
@@ -43,7 +45,7 @@ class COne {
 
 class CTwo {
     private var _d: Double
-        private var _p: COne?
+    private var _p: COne?
         
         var d: Double {
             get { return _d }
@@ -215,6 +217,9 @@ func demonstrateClassesTask() {
         print("two.p (исходный):")
         two.p?.printData() //исходный объект не изменился
     }
+    print("Here")
+    two.p? = COne(d: 12.0, s: "a")
+    two.p?.printData()
     
     print("\n")
     
@@ -224,6 +229,9 @@ func demonstrateClassesTask() {
     print("\n")
     
     let three = CThree(d: 3.0, p: copyOne, thirdField: "third field")
+    three.d = 4.0
+    
+    
     three.printData()
     
     print("\n")
@@ -236,3 +244,5 @@ func demonstrateClassesTask() {
     let objects: [CTwo] = [two, three, four]
     printAll(objects: objects, n: objects.count)
 }
+
+
