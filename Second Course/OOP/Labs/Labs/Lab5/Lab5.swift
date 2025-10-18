@@ -1,6 +1,6 @@
 // MARK: Задача 1: Шаблон класса CustomArray (Generic)
 
-class Pattern<T: Comparable> {
+class Pattern<T: Comparable & LosslessStringConvertible> {
     var elements: [T] {
         didSet {
             capacity = elements.count
@@ -37,10 +37,10 @@ class Pattern<T: Comparable> {
         
         for i in 0..<count {
             print("Введите элемент \(i + 1): ", terminator: "")
-            if let input = readLine() {
-                elements.append(input as! T)
+            if let input = readLine(), let value = T(input) {
+                elements.append(value)
             } else {
-                print("Некорректный ввод числа")
+                print("Некорректный ввод")
             }
         }
     }
@@ -48,9 +48,9 @@ class Pattern<T: Comparable> {
     //вывод элементов на экран
     func printElements() {
         if elements.isEmpty {
-            print("Массив пуст")
+            print("\nМассив пуст")
         } else {
-            print("Элементы массива: \(elements)")
+            print("\nЭлементы массива: \(elements)")
         }
         print(getCapacity())
     }
@@ -181,7 +181,28 @@ class Stack<T> {
 
 func demonstrateClassesPattern() {
     
+    print("Задание 1. Тесты\n")
+    
     let intArray = Pattern<Int>()
+    print("Требуется ввести Int")
     intArray.inputElements()
     intArray.printElements()
+    
+    let doubleArray = Pattern(elements: [1.5, 2.7, 3.9])
+    doubleArray.printElements()
+    
+    print("\nКопия")
+    let copiedArray = intArray.copy()
+    copiedArray.printElements()
+    
+    copiedArray.append(11)
+    copiedArray.printElements()
+    
+    let stringArray = Pattern<String>(elements: ["str1", "str2", "str3"])
+    stringArray.insert(Pattern(elements: ["str4", "str5"]), at: 2)
+    stringArray.printElements()
+}
+
+func demonstrateStack() {
+    print("\n\n\n Задание 3. Тесты")
 }

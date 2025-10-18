@@ -4,7 +4,12 @@
 //print ("\n\n\n")
 //demonstrateComplexTask()
 
-//Lab2
+//Lab2-4
 
-demonstrateClassesTask()
+//demonstrateClassesTask()
+
+//Lab5
+
+demonstrateClassesPattern()
+demonstrateStack()
 
