@@ -91,6 +91,97 @@ class Pattern<T: Comparable> {
 
 // MARK: Задача 3 (вариант 3): Шаблон класса для стэка (throw)
 
+enum StackError: Error {
+    case overflow, underflow
+}
+
 class Stack<T> {
+    private var elements: [T]
+    private let fixSize: Int
     
+    init() {
+        self.elements = []
+        self.fixSize = 5
+    }
+    
+    init(fixSize: Int, elements: [T]) throws {
+        self.fixSize = fixSize
+        if elements.count > fixSize {
+            throw StackError.overflow
+        }
+        self.elements = elements
+    }
+    
+    //проверка на пустоту
+    var isEmpty: Bool {
+        return elements.isEmpty
+    }
+    
+    //проверка на заполненность
+    var isFull: Bool {
+        return elements.count >= fixSize
+    }
+    
+    //текущее количество элементов
+    var size: Int {
+        return elements.count
+    }
+    
+    //получить размер
+    var capacity: Int {
+        return fixSize
+    }
+    
+    //очистить стэк
+    func clear() {
+        elements.removeAll()
+    }
+    
+    //вывести стэк
+    func printStack() {
+        if isEmpty {
+            print("Стэк пуст")
+        } else {
+            print("Стэк (сверху вниз): \(elements.reversed())")
+        }
+        print("Размер: \(size)/\(capacity)")
+    }
+    
+    
+    //добавить элемент в стэк
+    func append(_ element: T) throws {
+        guard !isFull else {
+            throw StackError.overflow
+        }
+        elements.append(element)
+    }
+    
+    //достать последний элемент стэка (и удалить)
+    func removeLast() throws -> T {
+        guard !isEmpty else {
+            throw StackError.underflow
+        }
+        return elements.removeLast()
+    }
+    
+    //достать последний элемент стэка (без удаления)
+    func showLast() throws -> T {
+        guard !isEmpty else {
+            throw StackError.underflow
+        }
+        return elements.last!
+    }
+    
+    subscript(index: Int) -> T {
+        get {
+            return elements[index]
+        }
+    }
+}
+
+func demonstrateClassesPattern() {
+    
+    let intArray = Pattern<Int>()
+    intArray.inputElements()
+    intArray.printElements()
 }
