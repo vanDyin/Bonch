@@ -10,6 +10,6 @@
 
 //Lab5
 
-demonstrateClassesPattern()
+//demonstratePattern()
 demonstrateStack()
 
