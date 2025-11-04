@@ -10,6 +10,8 @@ section .data
 
 section .text
 
+;(4*c - a/3 + 11) / (1+a-b)
+
 asm_calculate_8bit:
         ;числитель
 
@@ -50,34 +52,32 @@ asm_calculate_8bit:
 
 asm_calculate_16bit:
         ;числитель
-        movzx eax, word [c_16]
-        mov ebx, 4
-        mul ebx
+        movzx ax, word [c_16]
+        mov bx, 4
+        mul bx
         mov ecx, eax
 
-        ;Если операнд _16-разрядный, то инструкция div делит
-        ;_32-разрядное число в EDX:EAX на операнд, помещая частное в EAX, а остаток в EDX.
+        movzx ax, word [a_16]
+        mov bx, 3
+        mov dx, 0
+        div bx
 
-	movzx eax, word [a_16]
-        mov ebx, 3
-        mov edx, 0       ;EDX = 0 чтобы очистить EDX от мусора и EDX:EAX была чистой
-        div ebx
-
+        movzx eax, ax
         sub ecx, eax
         add ecx, 11
         mov [numerator_32], ecx
 
-        ;знаменатель
+        ;знаменатель (знаковые вычисления)
         movzx eax, word [a_16]
-	movzx ebx, word [b_16]
+        movzx ebx, word [b_16]
         add eax, 1
         sub eax, ebx
         mov [denominator_32], eax
 
-        ;результат
+        ;результат (знаковое деление)
         mov eax, [numerator_32]
         mov ebx, [denominator_32]
-        mov edx, 0
-        div ebx
+        cdq                       ; расширение знака для деления
+        idiv ebx
         mov [result_32], eax
         ret
