@@ -22,22 +22,22 @@ class Stack<T> {
     }
     
     //проверка на пустоту
-    var isEmpty: Bool {
+    func isEmpty() -> Bool {
         return elements.isEmpty
     }
     
     //проверка на заполненность
-    var isFull: Bool {
+    func isFull() -> Bool {
         return elements.count >= maxSize
     }
     
     //текущее количество элементов
-    var size: Int {
+    func size() -> Int {
         return elements.count
     }
     
     //получить размер
-    var capacity: Int {
+    func capacity() -> Int {
         return maxSize
     }
     
@@ -48,18 +48,18 @@ class Stack<T> {
     
     //вывести стэк
     func printStack() {
-        if isEmpty {
+        if isEmpty() {
             print("Стэк пуст")
         } else {
-            print("Стэк (сверху вниз): \(elements.reversed())")
+            print("Стэк (сверху вниз): \(Array(elements.reversed()))")
         }
-        print("Размер: \(size)/\(capacity)")
+        print("Размер: \(size())/\(capacity())")
     }
     
     
     //добавить элемент в стэк
-    func append(_ element: T) throws {
-        guard !isFull else {
+    func add(_ element: T) throws {
+        guard !isFull() else {
             throw StackError.overflow
         }
         elements.append(element)
@@ -67,7 +67,7 @@ class Stack<T> {
     
     //достать последний элемент стэка (и удалить)
     func removeLast() throws -> T {
-        guard !isEmpty else {
+        guard !isEmpty() else {
             throw StackError.underflow
         }
         return elements.removeLast()
@@ -75,7 +75,7 @@ class Stack<T> {
     
     //достать последний элемент стэка (без удаления)
     func showLast() throws -> T {
-        guard !isEmpty else {
+        guard !isEmpty() else {
             throw StackError.underflow
         }
         return elements.last!
@@ -95,7 +95,7 @@ func demonstrateStack() {
     
     do {
         for i in 1...5 {
-            try stack.append(i * 10)
+            try stack.add(i * 10)
             print("Добавлен: \(i * 10)")
         }
     } catch StackError.overflow {
@@ -114,7 +114,7 @@ func demonstrateStack() {
     }
     
     do {
-        while !stack.isEmpty {
+        while !stack.isEmpty() {
             let element = try stack.removeLast()
             print("\(element) удален ")
         }
@@ -141,7 +141,7 @@ func demonstrateStack() {
     }
     
     do {
-        try stringStack.append("str3")
+        try stringStack.add("str3")
         stringStack.printStack()
         
         let lastString = try stringStack.showLast()
